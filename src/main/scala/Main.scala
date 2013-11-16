@@ -13,8 +13,10 @@ object Main {
   def main(args: Array[String]) {
 
     val stocks = List(
-      "ACP", "LWB", "BRE", "BZW", "EUR", "GTC", "BHW", "JSW", "KER", "KGH", "LTS", "PEO",
-      "PGE", "PGN", "PKN", "PKO", "PZU", "SNS", "TPE", "TPS")
+      "ACP", "LWB", "BRE", "BZW", "EUR", "GTC", 
+      "BHW", "JSW", "KER", "KGH", "LTS", "PEO",
+      "PGE", "PGN", "PKN", "PKO", "PZU", "SNS", 
+      "TPE", "TPS")
 
     val requests = 
       for (stock <- stocks)
