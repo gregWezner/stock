@@ -7,6 +7,8 @@ import dispatch.Defaults._
 import java.util.concurrent.Executors
 import org.joda.time.DateTime
 import org.joda.convert.FromString
+import org.joda.time.format.DateTimeFormatter
+import org.joda.time.format.DateTimeFormatterBuilder
 
 object Main {
 
@@ -33,17 +35,14 @@ object Main {
       yield extract(req)
   }
   
-  def extract(str: String): Tuple3[java.util.Date, String, String] = {
+  def extract(str: String): IndexedSeq[Tuple3[org.joda.time.DateTime, String, String]] = {
     val splitted = str.split("\n")
-    val index = splitted(1).split(" ")
-    ( date(index(6)), index(0), index(3))
+    val ret =
+    for (i <- 1 to splitted.size-1)
+    	yield (DateTime.parse(splitted(i).split(" ")(6)), splitted(i).split(" ")(0), splitted(i).split(" ")(3))
+    ret
   }
   
-  @FromString
-  def static date(str: String): DateTime ={
-    
-  }
-
   private def createRequest (stock: String): dispatch.Future[String] = {
     Http(
       url("http://xml.wyborcza.biz/ArchivalProfileExportServlet.servlet")
